@@ -3,6 +3,11 @@ pipeline {
   agent any
   
   stages{
+    stage("Checkout code"){
+      steps{
+        git branch: 'main', url:'https://github.com/Rikiboatz/java-spring-demo.git'
+      }
+    }
     stage("build"){
       steps {
         echo 'Building the application...'
