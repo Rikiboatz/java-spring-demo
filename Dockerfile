@@ -14,6 +14,9 @@ WORKDIR /app
 # set timezone/locale หากต้องการ
 ENV TZ=Asia/Bangkok \
     JAVA_TOOL_OPTIONS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75"
+# สร้าง user ไม่รันเป็น root (ปลอดภัยขึ้น)
+RUN useradd -ms /bin/bash springuser
+USER springuser
 # copy fat-jar จาก build stage
 COPY --from=build /app/target/*-SNAPSHOT.jar app.jar
 EXPOSE 8080
